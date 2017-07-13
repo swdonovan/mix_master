@@ -1,19 +1,31 @@
 require 'rails_helper'
 
 RSpec.feature "User wanted to edit their playlist" do
+  before :each do
+    @song_one, @song_two, @song_three = create_list(:song, 3)
+
+    @playlist_name = "My Jams"
+
+    visit playlists_path
+    click_on "New playlist"
+    fill_in "playlist_name", with: @playlist_name
+    check("song-#{@song_one.id}")
+    check("song-#{@song_three.id}")
+    click_on "Create Playlist"
+    @the_playlist = Playlist.last
+  end
   scenario "they see the page for the playlist" do
-    song_one, song_two, song_three = create_list(:song, 3)
 
-    playlist_name = "My Jams"
-
-    vist playlist_path(song_one)
+    visit playlist_path(@the_playlist)
     click_on "Edit"
-    fill_in "playlist_name", with: playlist_name
-    uncheck("song-#{song_one.id}")
-    check("song-#{song_two.id}")
-    click_on "Submit"
+    fill_in "playlist_name", with: "Bill"
+    uncheck("song-#{@song_one.id}")
+    check("song-#{@song_two.id}")
+    click_on "Update Playlist"
 
-    expect(current_path).to eq playlist_path(song_one)
+    expect(current_path).to eq playlist_path(@song_one)
+    expect(page).to have_content "Bill"
+    expect(page).to have_content @song
   end
 end
 
