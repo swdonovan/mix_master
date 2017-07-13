@@ -12,12 +12,11 @@ RSpec.feature "User clicks on edit button from show page" do
   expect(page).to have_content("Edit Artist #{@test_artist.name}")
   expect(page).to have_content("Name")
   expect(page).to have_content("Image path")
-  expect(page).to have_button("Submit")
+  expect(page).to have_button("Update Artist")
 
   fill_in "artist_name", with: "Bill"
   fill_in "artist_image_path", with: artist_image_path
-
-  click_on "Submit"
+  click_on "Update Artist"
 
   expect(current_path).to eq("/artists/#{@test_artist.id}")
   expect(page).to have_content("Bill")

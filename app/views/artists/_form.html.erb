@@ -1,0 +1,11 @@
+<%= form_for @artist do |f| %>
+  <%= render partial: "shared/errors", locals: { target: @artist } %>
+
+  <%= f.label :name %>
+  <%= f.text_area :name %><br /><br />
+
+  <%= f.label :image_path %>
+  <%= f.text_area :image_path %><br /><br />
+
+  <h3><%= f.submit %></h3>
+<% end %>
