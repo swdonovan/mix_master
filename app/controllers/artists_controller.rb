@@ -18,9 +18,6 @@ class ArtistsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @artist.update(artist_params)
       flash.notice = "Artist # #{@artist.name} has been updated!"
