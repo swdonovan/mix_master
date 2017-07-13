@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'figaro'
+gem 'omniauth-oauth2'
 
 group :development, :test do
   gem 'rspec-rails'
